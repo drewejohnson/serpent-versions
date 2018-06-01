@@ -10,4 +10,5 @@ by examining the differences across SERPENT outputs.
 
 - Each input file is meant to be executed from this directory, using
 `sss2 <run args> 2.1.29/i2.1.29`
+- Matlab files are tracked using [`git lfs`](https://git-lfs.github.com/)
 

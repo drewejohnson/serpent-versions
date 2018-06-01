@@ -1,2 +1,17 @@
 * text eol=auto
 * text eol=lf
+2.1.28/i2.1.28_res.m filter=lfs diff=lfs merge=lfs -text
+2.1.30/i2.1.30_det1.m filter=lfs diff=lfs merge=lfs -text
+2.1.29/i2.1.29_det2.m filter=lfs diff=lfs merge=lfs -text
+2.1.28/i2.1.28_dep.m filter=lfs diff=lfs merge=lfs -text
+2.1.28/i2.1.28_det0.m filter=lfs diff=lfs merge=lfs -text
+2.1.28/i2.1.28_det1.m filter=lfs diff=lfs merge=lfs -text
+2.1.28/i2.1.28_det2.m filter=lfs diff=lfs merge=lfs -text
+2.1.29/i2.1.29_det0.m filter=lfs diff=lfs merge=lfs -text
+2.1.29/i2.1.29_dep.m filter=lfs diff=lfs merge=lfs -text
+2.1.29/i2.1.29_res.m filter=lfs diff=lfs merge=lfs -text
+2.1.30/i2.1.30_det2.m filter=lfs diff=lfs merge=lfs -text
+2.1.29/i2.1.29_det1.m filter=lfs diff=lfs merge=lfs -text
+2.1.30/i2.1.30_dep.m filter=lfs diff=lfs merge=lfs -text
+2.1.30/i2.1.30_det0.m filter=lfs diff=lfs merge=lfs -text
+2.1.30/i2.1.30_res.m filter=lfs diff=lfs merge=lfs -text

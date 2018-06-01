@@ -10,3 +10,10 @@ dist/
 venv/
 ENV/
 xs-libs
+*.dep
+*.seed
+# Update the bottom as we begin to support
+# more file types
+*bumat*
+*.out
+
