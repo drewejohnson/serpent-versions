@@ -1,0 +1,12 @@
+*.swp
+*.py[cod]
+build/
+dist/
+*.egg-info
+*.egg
+.ipynb_checkpoints
+.idea/*
+.venv
+venv/
+ENV/
+xs-libs

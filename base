@@ -1,0 +1,191 @@
+% -----------------------------------------------------------------------------
+
+% Geometry and material data are from the UO2 BWR (hot 40% void) case in:
+
+% A. Yamamoto, et al. "Benchmark Problem Suite for Reactor Physics Study of LWR
+% Next Generation Fuels." J. Nucl. Sci. Technol. 39 (2002) 900-912.
+
+% ----------------------------------
+% Utilizes the environment parameter
+% SERPENT_DATA to set the
+% default data library
+% ----------------------------------
+
+set acelib "sss_endfb7u.xsdata"
+set declib "sss_endfb7.dec"
+set nfylib "sss_endfb7.nfy"
+
+set pop 1000 50 20
+set seed 123456789
+set repro 1
+
+% --- Geometry model ----------------------------------------------------------
+
+% --- Fuel pins:
+
+pin 1
+fue1 0.49
+zirc 0.56
+cool
+
+pin 2
+fue2 0.49
+zirc 0.56
+cool
+
+pin 3
+fue3 0.49
+zirc 0.56
+cool
+
+pin 4
+fue4 0.49
+zirc 0.56
+cool
+
+pin G
+fueG 0.49
+zirc 0.56
+cool
+
+pin 9
+cool
+
+% --- Lattice:
+
+lat 10  1  0.0 0.0 11 11 1.440
+
+9 9 9 9 9 9 9 9 9 9 9
+9 4 3 2 1 1 1 2 3 4 9
+9 9 1 G 1 1 1 G 1 3 9
+9 9 9 1 G 1 G 1 G 2 9
+9 9 9 9 1 9 9 G 1 1 9
+9 9 9 9 9 9 9 1 1 1 9
+9 9 9 9 9 9 1 G 1 1 9
+9 9 9 9 9 9 9 1 G 2 9
+9 9 9 9 9 9 9 9 1 3 9
+9 9 9 9 9 9 9 9 9 4 9
+9 9 9 9 9 9 9 9 9 9 9
+
+% --- Flow channel:
+
+surf 1  sqc   0.0  0.0  6.70
+surf 2  sqc   0.0  0.0  6.95
+surf 3  sqc   0.0  0.0  7.62
+
+% --- Internal moderator channels:
+
+surf 4  cyl   0.915 -0.915  1.1750
+surf 5  cyl   0.915 -0.915  1.2450
+
+% --- Assembly:
+cell  1  0  moder    -4       
+cell  2  0  zirc      4 -5    
+cell  3  0  fill 10  -1  5 
+cell  4  0  zirc      1 -2    
+cell  5  0  moder     2 -3    
+cell 99  0  outside   3       
+
+% --- Boundary condition:
+
+set bc 2
+
+% --- Symmetry
+
+set usym 10 3 2 0.0 0.0 225 180
+
+% -----------------------------------------------------------------------------
+
+% --- Material data -----------------------------------------------------------
+
+% --- Fuel types:
+
+mat fue1   -10.1  burn 1
+92235.09c  1.4322E-03
+92238.09c  2.1032E-02
+ 8016.09c  4.4928E-02
+
+mat fue2   -10.1  burn 1
+92235.09c  1.1367E-03
+92238.09c  2.1324E-02
+ 8016.09c  4.4921E-02
+
+mat fue3   -10.1  burn 1
+92235.09c  9.0936E-04
+92238.09c  2.1549E-02
+ 8016.09c  4.4916E-02
+
+mat fue4   -10.1  burn 1
+92235.09c  6.8203E-04
+92238.09c  2.1774E-02
+ 8016.09c  4.4912E-02
+
+mat fueG    -9.8  burn 1
+92235.09c  1.0389E-03
+92238.09c  1.9490E-02
+ 8016.09c  4.3985E-02
+64154.09c  4.1864E-05
+64155.09c  2.8739E-04
+64156.09c  3.9950E-04
+64157.09c  3.0602E-04
+64158.09c  4.8536E-04
+64160.09c  4.3093E-04
+
+% --- Structural material
+
+mat zirc     -6.53 rgb 200 200 200
+ 40000.06c    1.00
+
+% --- Coolant and moderator:
+
+mat cool     -0.457   moder lwtr 1001 rgb 150 200 255
+ 1001.06c     0.66667
+ 8016.06c     0.33333
+
+mat moder    -0.737   moder lwtr 1001  rgb 100 150 205
+ 1001.06c     0.66667
+ 8016.06c     0.33333
+
+therm lwtr lwe7.12t
+
+% -----------------------------------------------------------------------------
+
+% - Detector
+
+ene twoGrp 4 default2
+ene fineGrp 4 nj2
+
+det xymesh 
+de twoGrp 
+dx -7.6 7.6 20
+dy -7.6 7.6 20
+
+mat u5 1 92235.06c 1
+
+det spectrum
+de fineGrp
+dr -1 void
+dr 18 u5
+
+set gcu 0
+
+% small depletion
+dep butot 0.5 1.0
+set powdens 1E3
+
+set inventory
+
+922350
+942390
+942400
+942410
+952410
+952430
+641550
+641570
+541350
+621490
+531310
+551340
+551370
+set printm 1 
